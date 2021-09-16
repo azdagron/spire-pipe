@@ -18,11 +18,11 @@ import (
 	"github.com/spiffe/go-spiffe/v2/proto/spiffe/workload"
 	"github.com/spiffe/go-spiffe/v2/spiffetls/tlsconfig"
 	"github.com/spiffe/go-spiffe/v2/workloadapi"
-	"github.com/spiffe/spire/proto/spire/api/node"
-	"github.com/spiffe/spire/proto/spire/api/server/agent/v1"
-	"github.com/spiffe/spire/proto/spire/api/server/bundle/v1"
-	"github.com/spiffe/spire/proto/spire/api/server/entry/v1"
-	"github.com/spiffe/spire/proto/spire/api/server/svid/v1"
+	agentv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/agent/v1"
+	bundlev1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/bundle/v1"
+	entryv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/entry/v1"
+	svidv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/svid/v1"
+	trustdomainv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/trustdomain/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
@@ -51,11 +51,11 @@ func dasherizeAPIName(s string) string {
 
 func RPCCommand() *cobra.Command {
 	cmd := &cobra.Command{Use: "rpc"}
-	cmd.AddCommand(makeServerAPICommands("Node", node.NewNodeClient))
-	cmd.AddCommand(makeServerAPICommands("Agent", agent.NewAgentClient))
-	cmd.AddCommand(makeServerAPICommands("Entry", entry.NewEntryClient))
-	cmd.AddCommand(makeServerAPICommands("Bundle", bundle.NewBundleClient))
-	cmd.AddCommand(makeServerAPICommands("SVID", svid.NewSVIDClient))
+	cmd.AddCommand(makeServerAPICommands("Agent", agentv1.NewAgentClient))
+	cmd.AddCommand(makeServerAPICommands("Entry", entryv1.NewEntryClient))
+	cmd.AddCommand(makeServerAPICommands("Bundle", bundlev1.NewBundleClient))
+	cmd.AddCommand(makeServerAPICommands("SVID", svidv1.NewSVIDClient))
+	cmd.AddCommand(makeServerAPICommands("TrustDomain", trustdomainv1.NewTrustDomainClient))
 	cmd.AddCommand(makeAgentAPICommands("Workload", workload.NewSpiffeWorkloadAPIClient))
 	return cmd
 }
