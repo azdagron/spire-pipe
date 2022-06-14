@@ -3,8 +3,9 @@ package main
 import (
 	"errors"
 	"fmt"
-	"spire-pipe/codec"
 	"strings"
+
+	"github.com/azdagron/spire-pipe/codec"
 )
 
 type BytesFormatFlag []codec.Bytes

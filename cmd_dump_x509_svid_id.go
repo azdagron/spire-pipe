@@ -5,8 +5,8 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
-	"spire-pipe/codec"
 
+	"github.com/azdagron/spire-pipe/codec"
 	"github.com/spf13/cobra"
 )
 

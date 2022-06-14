@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"spire-pipe/codec"
 
+	"github.com/azdagron/spire-pipe/codec"
 	"github.com/spf13/cobra"
 	"gopkg.in/square/go-jose.v2/jwt"
 )

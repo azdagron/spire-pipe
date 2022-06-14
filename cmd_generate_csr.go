@@ -7,8 +7,8 @@ import (
 	"crypto/x509"
 	"fmt"
 	"net/url"
-	"spire-pipe/codec"
 
+	"github.com/azdagron/spire-pipe/codec"
 	"github.com/spf13/cobra"
 )
 
