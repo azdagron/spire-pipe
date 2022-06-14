@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"spire-pipe/codec"
 
+	"github.com/azdagron/spire-pipe/codec"
 	"github.com/spf13/cobra"
 )
 

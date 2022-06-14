@@ -6,8 +6,8 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
-	"spire-pipe/codec"
 
+	"github.com/azdagron/spire-pipe/codec"
 	"github.com/spf13/cobra"
 )
 
