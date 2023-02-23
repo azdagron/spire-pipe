@@ -20,6 +20,7 @@ import (
 	"github.com/spiffe/go-spiffe/v2/workloadapi"
 	agentv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/agent/v1"
 	bundlev1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/bundle/v1"
+	debugv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/debug/v1"
 	entryv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/entry/v1"
 	svidv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/svid/v1"
 	trustdomainv1 "github.com/spiffe/spire-api-sdk/proto/spire/api/server/trustdomain/v1"
@@ -52,6 +53,7 @@ func dasherizeAPIName(s string) string {
 func RPCCommand() *cobra.Command {
 	cmd := &cobra.Command{Use: "rpc"}
 	cmd.AddCommand(makeServerAPICommands("Agent", agentv1.NewAgentClient))
+	cmd.AddCommand(makeServerAPICommands("Debug", debugv1.NewDebugClient))
 	cmd.AddCommand(makeServerAPICommands("Entry", entryv1.NewEntryClient))
 	cmd.AddCommand(makeServerAPICommands("Bundle", bundlev1.NewBundleClient))
 	cmd.AddCommand(makeServerAPICommands("SVID", svidv1.NewSVIDClient))
