@@ -6,8 +6,9 @@ import (
 	"fmt"
 
 	"github.com/azdagron/spire-pipe/codec"
+	"github.com/go-jose/go-jose/v4"
+	"github.com/go-jose/go-jose/v4/jwt"
 	"github.com/spf13/cobra"
-	"gopkg.in/square/go-jose.v2/jwt"
 )
 
 func DumpJWTSVIDIDCommand() *cobra.Command {
@@ -34,7 +35,11 @@ func (cmd *dumpJWTSVIDID) Run(_ context.Context, in []byte, args []string) ([]by
 		return nil, fmt.Errorf("JWT-SVID has invalid format: %v", err)
 	}
 
-	tok, err := jwt.ParseSigned(string(svidBytes))
+	tok, err := jwt.ParseSigned(string(svidBytes), []jose.SignatureAlgorithm{
+		jose.RS256, jose.RS384, jose.RS512,
+		jose.ES256, jose.ES384, jose.ES512,
+		jose.PS256, jose.PS384, jose.PS512,
+	})
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse JWT-SIVD: %v", err)
 	}
