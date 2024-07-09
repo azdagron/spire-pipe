@@ -1,6 +1,6 @@
 module github.com/azdagron/spire-pipe
 
-go 1.22.1
+go 1.22.5
 
 require (
 	github.com/go-jose/go-jose/v4 v4.0.2
