@@ -29,3 +29,8 @@ Obtain a list of registration entries (via the SPIRE Server TCP port using an ad
 ```
 $ jq -n '{}' | spire-pipe rpc entry list-entries --use-workload-api | jq .
 ```
+
+Obtain a list of registration entries (via the SPIRE Server TCP port using an admin SVID minted manually outside of the normal node/workload registration process):
+```
+$ jq -n '{}' | spire-pipe rpc entry list-entries --tcp-addr <SERVER:PORT> --svid-path /path/to/svid
+```
