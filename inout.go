@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"io"
-	"io/ioutil"
 
 	"github.com/spf13/cobra"
 )
@@ -57,7 +56,7 @@ func readAll(ctx context.Context, r io.Reader) ([]byte, error) {
 	}
 	resultCh := make(chan result, 1)
 	go func() {
-		in, err := ioutil.ReadAll(r)
+		in, err := io.ReadAll(r)
 		resultCh <- result{in: in, err: err}
 	}()
 
