@@ -8,7 +8,6 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"reflect"
@@ -132,8 +131,6 @@ type rpcOption func(*rpcConfig)
 type rpcCommand struct {
 	newClientFn reflect.Value
 	methodName  string
-	useTCP      bool
-	svidPath    string
 	config      *rpcConfig
 }
 
@@ -161,7 +158,7 @@ func (cmd *rpcCommand) Run(ctx context.Context, jsonIn []byte, args []string) ([
 	var err error
 	switch {
 	case cmd.config.svidPath != "":
-		conn, err = dialTCPWithSVID(cmd.config.tcpAddr, cmd.svidPath)
+		conn, err = dialTCPWithSVID(cmd.config.tcpAddr, cmd.config.svidPath)
 	case cmd.config.useWorkloadAPI:
 		conn, err = dialTCPWithSVIDFromWorkloadAPI(ctx, cmd.config.tcpAddr, cmd.config.workloadAPIAddr)
 	case cmd.config.useTCP:
@@ -310,7 +307,7 @@ func rawCertsFromCertificates(certs []*x509.Certificate) [][]byte {
 }
 
 func loadSVID(path string) (_ []*x509.Certificate, _ crypto.Signer, err error) {
-	pemBytes, err := ioutil.ReadFile(path)
+	pemBytes, err := os.ReadFile(path)	
 	if os.IsNotExist(err) {
 		return nil, nil, fmt.Errorf("unable to load SVID: %v", err)
 	}
